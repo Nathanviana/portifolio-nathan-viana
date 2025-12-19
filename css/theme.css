@@ -1,0 +1,349 @@
+/* ===========================
+   Tema escuro simplificado
+   =========================== */
+
+/* 1) Design tokens (cores) */
+:root {
+  /* Base */
+  --color-bg: #0f1216;        /* fundo geral */
+  --color-surface: #161a20;   /* barras, seções escuras */
+  --color-surface-2: #1c222b; /* variação de surface */
+  --color-card: #f3f5f7;      /* cards claros (como nas imagens) */
+  --color-border: #2a313c;
+
+  /* Texto */
+  --color-text: #e6ebf3;
+  --color-text-muted: #9aa6b2;
+  --color-heading: #ffffff;
+
+  /* Ação */
+  --color-primary: #4f7cff;
+  --color-primary-600: #3b66e2;
+  --color-secondary: #b23dff;
+
+  /* Efeitos */
+  --shadow-elev: 0 10px 30px rgba(0, 0, 0, .25);
+  --radius-3: 1rem;
+}
+
+/* 2) Base */
+html, body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--color-heading);
+  letter-spacing: -0.02em;
+}
+
+p { color: var(--color-text); }
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover { color: var(--color-primary-600); }
+
+/* 3) Gradientes utilitários */
+.bg-gradient-primary-to-secondary {
+  background-image: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+}
+.text-gradient {
+  background-image: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 4) Utilitários suaves (mantém HTML intacto) */
+.bg-dark { background-color: var(--color-surface) !important; color: var(--color-text) !important; }
+.bg-light, .bg-white { background-color: var(--color-card) !important; color: #f4f4f4 !important; }
+.text-primary { color: var(--color-primary) !important; }
+.text-muted { color: var(--color-text-muted) !important; }
+.text-green { color: #1de94c !important; }
+
+/* 5) Navbar (escura) */
+.navbar.bg-dark { background-color: var(--color-surface) !important; }
+.navbar .navbar-brand { color: var(--color-heading) !important; }
+.navbar .nav-link { color: var(--color-text-muted) !important; }
+.navbar .nav-link:hover { color: var(--color-text) !important; }
+
+/* 6) Header sutil */
+header { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)); }
+
+/* 7) Cards – estilo “Liquid Glass” */
+/* Base glass: semi-transparente, com blur e brilho suave, compatível com tema escuro */
+.card, .about-card, .shadow-card {
+  position: relative;
+  border-radius: var(--radius-3);
+  /* vidro translúcido: gradiente sutil + transparência */
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06)) !important;
+  border: 1px solid rgba(255,255,255,0.20);
+  /* efeito vidro */
+  backdrop-filter: saturate(140%) blur(16px);
+  -webkit-backdrop-filter: saturate(140%) blur(16px);
+  /* brilho e profundidade */
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+  /* texto escuro dentro de cards claros não é necessário – manter contraste com tema escuro */
+  color: var(--color-text);
+}
+
+/* Fallback para navegadores sem suporte a backdrop-filter */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .card, .about-card, .shadow-card {
+    background: rgba(255,255,255,0.10) !important;
+  }
+}
+
+/* Estados de foco/hover para dar sensação líquida */
+.card:hover, .about-card:hover, .shadow-card:hover {
+  border-color: rgba(255,255,255,0.28);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.10);
+  transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+  transform: translateY(-2px);
+}
+
+/* Conteúdo interno do card: separadores e tipografia suaves */
+.about-body .about-paragraph {
+  color: var(--color-text);
+  font-weight: 400;
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+.about-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.18), rgba(255,255,255,0));
+  margin: 1rem 0;
+}
+.about-signature { color: var(--color-heading); font-weight: 600; }
+
+/* “Chips” e caixas claras dentro dos cards (bg-light) em estilo glass leve */
+.bg-light.rounded-4, .bg-white.rounded-4 {
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.10)) !important;
+  border: 1px solid rgba(255,255,255,0.22) !important;
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+/* 8) Botões */
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-bg: var(--color-primary-600);
+  --bs-btn-hover-border-color: var(--color-primary-600);
+  --bs-btn-focus-shadow-rgb: 80, 140, 255;
+}
+
+.btn-white {
+  --bs-btn-color: #0d1117;
+  --bs-btn-bg: var(--color-card);
+  --bs-btn-border-color: var(--color-card);
+  --bs-btn-hover-bg: #3d3d3d;
+  --bs-btn-focus-shadow-rgb: 200, 210, 218;
+}
+
+/* Botão que usa bg-white no HTML vira “card” claro */
+.btn.bg-white {
+  background-color: var(--color-card) !important;
+  color: #0d1117 !important;
+  border-color: transparent !important;
+}
+.btn.bg-white:hover { filter: brightness(0.97); }
+
+/* 9) Badge com gradiente */
+.badge.bg-gradient-primary-to-secondary { color: #fff !important; border: 0; }
+
+/* 10) Footer escuro */
+footer.bg-dark { background-color: var(--color-surface) !important; color: var(--color-text-muted); }
+footer.bg-dark a { color: var(--color-text-muted); }
+footer.bg-dark a:hover { color: var(--color-text); }
+
+/* 11) Utilitários extras */
+.rounded-4 { border-radius: var(--radius-3) !important; }
+.shadow-sm { box-shadow: var(--shadow-elev) !important; }
+
+/* 12) Acessibilidade */
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+/* ===========================
+   Contact Card (glass + neon)
+   =========================== */
+.neon-backdrop {
+  position: relative;
+  overflow: hidden;
+  /* full-bleed section background */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  /* fill the available hero height */
+  min-height: inherit;
+  /* center the card inside */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: clamp(24px, 5vh, 64px);
+}
+.neon-backdrop::before,
+.neon-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.neon-backdrop::before {
+  background:
+    radial-gradient(900px at 15% 25%, rgba(79,124,255,0.35), transparent 60%),
+    radial-gradient(1000px at 85% 20%, rgba(178,61,255,0.30), transparent 65%);
+}
+.neon-backdrop::after {
+  background:
+    radial-gradient(1000px at 80% 85%, rgba(79,124,255,0.25), transparent 65%),
+    radial-gradient(850px at 25% 90%, rgba(29,233,76,0.15), transparent 70%);
+}
+
+.contact-card {
+  width: min(560px, 100%);
+  margin: 0 auto;
+  padding: 1rem 1rem 0.75rem;
+  backdrop-filter: saturate(140%) blur(16px);
+  -webkit-backdrop-filter: saturate(140%) blur(16px);
+  overflow: hidden;
+}
+
+/* Center the card vertically in the hero */
+.contact-hero {
+  /* Fill viewport between navbar and footer, with safe fallback */
+  min-height: max(70vh, calc(100vh - var(--header-h, 64px) - var(--footer-h, 120px)));
+}
+
+/* ===========================
+   Resume (mobile tweaks)
+   =========================== */
+@media (max-width: 576px) {
+  .resume-header {align-items: flex-start; gap: 0.75rem; }
+  .resume-header h2 { margin-bottom: 0; }
+  .resume-download {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 0.5rem !important;
+  }
+}
+
+/* Projects – mobile layout */
+@media (max-width: 576px) {
+  .projects-section .card-body > .d-flex { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .projects-section .card-body > .d-flex .p-5 { padding: 1rem !important; }
+  .projects-section .img-fluid { width: 100%; height: auto; display: block; border-radius: 0 0 1rem 1rem; }
+  .projects-section .btn { padding: 0.5rem 0.75rem; font-size: 0.875rem; }
+  .projects-section h2.fw-bolder { font-size: 1.25rem; }
+}
+
+/* Technology chips (projects) */
+.projects-section .tech-chip {
+  background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08)) !important;
+  border: 1px solid rgba(255,255,255,0.22) !important;
+  color: var(--color-text) !important;
+  backdrop-filter: saturate(140%) blur(8px);
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  border-radius: 0.75rem !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.9rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+.projects-section .tech-chip:hover { border-color: rgba(255,255,255,0.28) !important; }
+@media (max-width: 576px) {
+  .projects-section .tech-chip { font-size: 0.70rem; padding: 0.45rem 0.4rem !important; }
+}
+
+.contact-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.progress-dots { display: flex; gap: 6px; }
+.progress-dots .dot {
+  width: 8px; height: 8px; border-radius: 999px;
+  background: rgba(255,255,255,0.25);
+}
+.progress-dots .dot.active { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); }
+.card-icon {
+  color: #fff; background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  width: 42px; height: 42px; border-radius: 12px;
+  display: grid; place-items: center;
+}
+
+.contact-card-body { text-align: center; padding: 0.25rem 0.25rem 0.5rem; }
+.contact-card-body .title { font-weight: 700; font-size: 1.25rem; }
+.contact-card-body .subtitle { color: var(--color-text-muted); margin-bottom: 1rem; }
+
+.options { display: grid; gap: 0.5rem; }
+.contact-option {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem; border-radius: 0.75rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.08));
+  border: 1px solid rgba(255,255,255,0.20);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+.contact-option:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.28);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+.contact-option .left { display: flex; align-items: center; gap: 0.75rem; }
+.contact-option .icon {
+  width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.20);
+}
+.contact-option .icon.whatsapp { color: #25D366; }
+.contact-option .icon.email { color: #ffd580; }
+.contact-option .icon.linkedin { color: #0A66C2; }
+.contact-option .icon.github { color: #ffffff; }
+.contact-option .text .name { font-weight: 600; }
+.contact-option .text .desc { color: var(--color-text-muted); font-size: 0.95rem; }
+.contact-option .arrow { color: var(--color-text-muted); margin-left: auto; flex-shrink: 0; }
+.contact-option:hover .arrow { color: var(--color-text); }
+
+.contact-card-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 0.5rem 0.5rem; gap: 0.5rem;
+}
+.contact-card-footer .btn.btn-outline-light {
+  --bs-btn-color: #e6ebf3;
+  --bs-btn-border-color: rgba(255,255,255,0.25);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: rgba(255,255,255,0.12);
+  --bs-btn-hover-border-color: rgba(255,255,255,0.35);
+  border-radius: 999px;
+}
+
+/* Contact – mobile tweaks */
+@media (max-width: 576px) {
+  .contact-hero { padding-block: 16px; }
+  .neon-backdrop { filter: none; }
+  .contact-card { width: auto; max-width: 360px; padding: 0.75rem; }
+  .contact-card-body { padding: 0.25rem; }
+  .contact-card-body .title { font-size: 1.125rem; }
+  .contact-card-body .subtitle { font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .options { gap: 0.5rem; }
+  .contact-option { padding: 0.625rem 0.75rem; border-radius: 0.75rem; }
+  .contact-option .left { gap: 0.6rem; }
+  .contact-option .icon { width: 34px; height: 34px; border-radius: 10px; }
+  .contact-option .text .name { font-size: 0.95rem; }
+  .contact-option .text .desc { font-size: 0.85rem; }
+}
+
+@media (max-width: 576px) {
+  .neon-backdrop::before, .neon-backdrop::after { filter: blur(60px); }
+}
