@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-background-dark: #0f1216;
+  --color-card-dark: #1a1e24;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #fafafa;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Utilities */
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-gradient {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
