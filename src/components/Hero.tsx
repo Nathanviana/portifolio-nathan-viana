@@ -40,7 +40,7 @@ export default function Hero() {
               Conectar no LinkedIn
             </Link>
             <Link
-              href="/Currículo Nathan viana - 2025.pdf"
+              href="/Curriculo-Nathan-Viana-2026.pdf"
               target="_blank"
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 bg-white border border-slate-200 shadow-sm rounded-xl text-sm font-bold text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5 transition-all duration-300"
             >
