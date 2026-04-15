@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -15,6 +16,8 @@ export const metadata: Metadata = {
   description: "Portfólio de Nathan Viana - Desenvolvedor Web, Python, Next.js",
 };
 
+const GA_ID = "G-KRBTWCTL7F";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,6 +28,21 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${plusJakartaSans.variable} font-sans antialiased bg-gray-50 text-slate-800`}
     >
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
+      </head>
       <body className="min-h-screen flex flex-col">
         <CustomCursor />
         <Header />
