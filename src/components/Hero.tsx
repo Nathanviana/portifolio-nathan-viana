@@ -69,7 +69,7 @@ export default function Hero() {
           
           <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/50 shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500 bg-slate-100">
             <Image
-              src="/nathan-user.png" 
+              src="/foto-de-perfil.png" 
               alt="Nathan Viana"
               fill
               className="object-cover object-top"
